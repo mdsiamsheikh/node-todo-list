@@ -32,11 +32,14 @@ app.post("/todo", async (req, res) => {
   const todo = req.body;
   todo.id = todoCount + 1;
 
-  await client.db("todos-collection").collection("todos").insertOne(todo);
+  const db = await client
+    .db("todos-collection")
+    .collection("todos")
+    .insertOne(todo);
 
   res.send({
-    success: true,
-    todo,
+    success: !!db,
+    db,
   });
 });
 
