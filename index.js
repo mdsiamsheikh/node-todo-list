@@ -37,9 +37,10 @@ app.post("/todo", async (req, res) => {
     .collection("todos")
     .insertOne(todo);
 
+  const result = db.ops[0];
   res.send({
     success: !!db,
-    db,
+    result,
   });
 });
 
